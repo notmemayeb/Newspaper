@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from warnings import warn
+from uuid import uuid1
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,11 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nn0hpc^4p_jc%fn0n6hb53^m7x63oh$@(@2+k94)r@e+)^_6co'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+if os.getenv('SECRET_KEY'):
+    SECRET_KEY = os.getenv('SECRET_KEY')
+elif DEBUG:
+    SECRET_KEY = 'secret'
+else:
+    SECRET_KEY = str(uuid1())
+    warn('Using random SECRET_KEY. '
+         'Should configure it for production.')
 
 ALLOWED_HOSTS = []
 

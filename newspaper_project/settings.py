@@ -23,7 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
+
+# Secret key
 
 if os.getenv('SECRET_KEY'):
     SECRET_KEY = os.getenv('SECRET_KEY')
@@ -34,7 +37,10 @@ else:
     warn('Using random SECRET_KEY. '
          'Should configure it for production.')
 
-ALLOWED_HOSTS = []
+
+# Hosts
+
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -50,6 +56,7 @@ INSTALLED_APPS = [
     # Local
     'users',
     'pages',
+    'articles',
 
     # 3rd Party
     'crispy_forms',
@@ -121,7 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET'
 
 USE_I18N = True
 
